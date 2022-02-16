@@ -1,16 +1,51 @@
-// const URL = require('url').URL
+const rekvest = require('rekvest')
 
-module.exports = async function(req, res) {
+const DOMAIN = 'http://localhost'
 
-  // TODO: Find exact origin
-  // const url = new URL($.req.headers.referer)
-  // const origin = url.hostname
+const OPTIONS = {
+  credentials: true,
+  headers: [
+     'Origin',
+     'X-Requested-With',
+     'Content-Type',
+     'Accept',
+     'Authorization',
+     'Cache-Control'
+  ],
+  methods: [
+    'GET',
+    'POST',
+    'OPTIONS',
+    'PUT',
+    'PATCH',
+    'DELETE'
+  ],
+  domains: [DOMAIN]
+}
 
-  let origin = req.headers.referer
-  if (!origin) return
-  if (origin.endsWith('/')) origin = origin.slice(0, -1)
-  res.setHeader('Access-Control-Allow-Origin', origin)
-  res.setHeader('Access-Control-Allow-Credentials', 'true')
-  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cache-Control')
-  // res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
+module.exports = async function(req, res, opt = {}) {
+  opt = { ...OPTIONS, ...opt }
+
+  rekvest(req)
+
+  let domain = `${req.protocol}//${req.hostname}`
+  if (!req.protocol || !req.hostname) {
+    domain = DOMAIN
+  }
+
+  if (Array.isArray(opt.domains) && opt.domains.includes(domain)) {
+    res.setHeader('Access-Control-Allow-Origin', domain)
+  }
+
+  if (opt.credentials) {
+    res.setHeader('Access-Control-Allow-Credentials', 'true')
+  }
+
+  if (Array.isArray(opt.headers) && opt.headers.length) {
+    res.setHeader('Access-Control-Allow-Headers', opt.headers.join(', '))
+  }
+
+  if (Array.isArray(opt.methods) && opt.methods.length) {
+    res.setHeader('Access-Control-Allow-Methods', opt.methods.join(', '))
+  }
 }

@@ -43,7 +43,11 @@ const options = {
   ],
 
   // The domain names allowed
-  domains: ['http://localhost']
+  // Undefined (default) means all domains are allowed
+  domains: undefined,
+
+  // Specific, multiple supported
+  domains: ['https://www.7i.no', 'https://docs.7i.no']
 }
 
 // Override them with

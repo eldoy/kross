@@ -19,8 +19,7 @@ const OPTIONS = {
     'PUT',
     'PATCH',
     'DELETE'
-  ],
-  domains: [DOMAIN]
+  ]
 }
 
 module.exports = async function(req, res, opt = {}) {
@@ -33,7 +32,7 @@ module.exports = async function(req, res, opt = {}) {
     domain = DOMAIN
   }
 
-  if (Array.isArray(opt.domains) && opt.domains.includes(domain)) {
+  if (!opt.domains || Array.isArray(opt.domains) && opt.domains.includes(domain)) {
     res.setHeader('Access-Control-Allow-Origin', domain)
   }
 

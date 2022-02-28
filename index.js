@@ -24,7 +24,7 @@ module.exports = async function(req, res, opt = {}) {
   const origin = req.headers.origin
   if (!origin) return
 
-  if (!opt.origins || Array.isArray(opt.origins) && opt.origins.includes(origin)) {
+  if (!opt.domains || Array.isArray(opt.domains) && opt.domains.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin)
   }
 

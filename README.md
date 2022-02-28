@@ -13,7 +13,7 @@ In your web application do this:
 ```js
 const cors = require('kross')
 
-// The default will allow all origins
+// The default will allow all domains
 cors(req, res)
 
 // These are the default options
@@ -42,12 +42,12 @@ const options = {
     'DELETE'
   ],
 
-  // The domain origins allowed
-  // Undefined (default) means all domain origins are allowed
-  origins: undefined,
+  // The domain names allowed
+  // Undefined (default) means all domains are allowed
+  domains: undefined,
 
   // Specific, multiple supported
-  origins: ['https://www.7i.no', 'https://docs.7i.no']
+  domains: ['https://www.7i.no', 'https://docs.7i.no']
 }
 
 // Override them with

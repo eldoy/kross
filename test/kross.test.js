@@ -5,7 +5,7 @@
 const axios = require('axios')
 const url = 'http://localhost:8024'
 
-it('should allow domain', async () => {
+it('should allow origin', async () => {
   await new Promise(r => setTimeout(r, 500))
 
   let result

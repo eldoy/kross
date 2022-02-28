@@ -1,7 +1,3 @@
-const rekvest = require('rekvest')
-
-const DOMAIN = 'http://localhost'
-
 const OPTIONS = {
   credentials: true,
   headers: [
@@ -25,15 +21,11 @@ const OPTIONS = {
 module.exports = async function(req, res, opt = {}) {
   opt = { ...OPTIONS, ...opt }
 
-  rekvest(req)
+  const origin = req.headers.origin
+  if (!origin) return
 
-  let domain = `${req.protocol}//${req.hostname}`
-  if (!req.protocol || !req.hostname) {
-    domain = DOMAIN
-  }
-
-  if (!opt.domains || Array.isArray(opt.domains) && opt.domains.includes(domain)) {
-    res.setHeader('Access-Control-Allow-Origin', domain)
+  if (!opt.origins || Array.isArray(opt.origins) && opt.origins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin)
   }
 
   if (opt.credentials) {

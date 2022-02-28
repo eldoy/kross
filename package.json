@@ -17,8 +17,5 @@
     "axios": "^0.26.0",
     "jest": "^27.5.1",
     "sirloin": "^0.22.3"
-  },
-  "dependencies": {
-    "rekvest": "^0.1.4"
   }
 }

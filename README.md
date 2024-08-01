@@ -11,13 +11,13 @@ npm i kross
 
 In your web application do this:
 ```js
-const cors = require('kross')
+var cors = require('kross')
 
 // The default will allow all domains
 cors(req, res)
 
 // These are the default options
-const options = {
+var options = {
 
   // If credentials are allowed
   credentials: true,

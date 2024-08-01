@@ -1,30 +1,26 @@
-const OPTIONS = {
+var OPTIONS = {
   credentials: true,
   headers: [
-     'Origin',
-     'X-Requested-With',
-     'Content-Type',
-     'Accept',
-     'Authorization',
-     'Cache-Control'
+    'Origin',
+    'X-Requested-With',
+    'Content-Type',
+    'Accept',
+    'Authorization',
+    'Cache-Control'
   ],
-  methods: [
-    'GET',
-    'POST',
-    'OPTIONS',
-    'PUT',
-    'PATCH',
-    'DELETE'
-  ]
+  methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'PATCH', 'DELETE']
 }
 
-module.exports = async function(req, res, opt = {}) {
+module.exports = async function (req, res, opt = {}) {
   opt = { ...OPTIONS, ...opt }
 
-  const origin = req.headers.origin
+  var origin = req.headers.origin
   if (!origin) return
 
-  if (!opt.domains || Array.isArray(opt.domains) && opt.domains.includes(origin)) {
+  if (
+    !opt.domains ||
+    (Array.isArray(opt.domains) && opt.domains.includes(origin))
+  ) {
     res.setHeader('Access-Control-Allow-Origin', origin)
   }
 

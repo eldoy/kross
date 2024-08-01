@@ -7,6 +7,9 @@
     "serve:test": "nodemon server.js",
     "test": "jest --watch"
   },
+  "files": [
+    "index.js"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/eldoy/kross"
